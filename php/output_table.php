@@ -19,6 +19,7 @@ EOT;
     else {
         $header .= <<<EOT
 <form role="form" id="export_pdf" action="./export_pdf.php" method="post" enctype="multipart/form-data" target="_blank">
+タイトルを以下に入力してください (生成される PDF の見出しになります): <input type="text" name="heading_text" class="form-control mb-1">
 <input id="export_pdf_btn" type="submit" class="btn btn-primary mb-3 btn-block" value="PDF をエクスポート">
 </form>
 EOT;

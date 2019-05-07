@@ -5,6 +5,10 @@ require_once "../../TCPDF/tcpdf.php";
 
 session_start();
 
+// get heading
+$heading = $_POST['heading_text'];
+$htag = "<h1>" . $heading . "</h1>";
+
 // add font
 $font = new TCPDF_FONTS();
 
@@ -13,7 +17,8 @@ $tcpdf = new TCPDF("Landscape");
 $tcpdf -> AddPage();
 $tcpdf -> SetFont('kozgopromedium', '', 12);
 
-$tcpdf -> writeHTML($_SESSION['html']);
-$tcpdf -> Output("test.pdf");
+$html = $htag . $_SESSION['html'];
+$tcpdf -> writeHTML($html);
+$tcpdf -> Output();
 
 ?>
