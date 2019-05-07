@@ -1,5 +1,4 @@
 <?php
-
 // 他のサイトでインラインフレーム表示を禁止する（クリックジャッキング対策）
 header('X-FRAME-OPTIONS: SAMEORIGIN');
 
@@ -87,22 +86,10 @@ $token = $_SESSION['token'];
                 <!-- ignore list: Team ID, AtCoder ID, Affiliation -->
                 <h3><span class="fas fa-times-circle"></span> 出力時に無視する項目の設定</h3>
 
-                <p class="my-2">表の出力時に無視する項目を設定します。Team ID, AtCoder ID, Affiliation それぞれに対して、出力時に表示してほしくない人の <span style="font-weight:bold;">ハンドルネーム</span> を改行区切りで指定してください。テキストファイルを読み込むことも可能です。</p>
+                <p class="my-2">表の出力時に無視する項目を設定します。AtCoder ID, 所属のそれぞれについて、出力時に表示してほしくない人の <span style="font-weight:bold;">ハンドルネーム</span> を改行区切りで指定してください。テキストファイルを読み込むことも可能です。</p>
 
                 <!-- ignore contents section -->
                 <div id="ignore_section">
-                    <div id="ignore_team_id_section">
-                        <h4 class="mt-3"><span class="fas fa-list-ul"></span> Team ID を無視する人の一覧</h4>
-                        <div class="input-group">
-                            <label class="input-group-btn">
-                                <span class="btn btn-primary">
-                                    ファイルを選択<input type="file" name="ignore_team_id_file" accept="application/json" style="display:none">
-                                </span>
-                            </label>
-                            <textarea name="ignore_team_id"></textarea>
-                        </div>
-                    </div>
-
                     <div id="ignore_atcoder_id_section">
                         <h4 class="mt-3"><span class="fas fa-list-ul"></span> AtCoder ID を無視する人の一覧</h4>
                         <div class="input-group">
@@ -132,14 +119,28 @@ $token = $_SESSION['token'];
                 <!-- option -->
                 <h3><span class="fas fa-cog"></span> オプション</h3>
                 <div id="option_section">
-                    <p class="my-2">Team ID, AtCoder ID, 所属のそれぞれについて表に表示させるかを選択します。選択しなかった場合は、その項目が全員について非表示になります。</p>
+                    <p class="my-2">AtCoder ID, 所属のそれぞれについて、表に表示させるかを選択します。選択しなかった場合は、その項目が全員について非表示になります。</p>
+                    
+                    <div class="custom-control custom-checkbox form-check">
+                        <input type="hidden" name="show_atcoder_id" value="0">
+                        <input type="checkbox" class="custom-control-input" name="show_atcoder_id" value="1" checked="checked" id="show_atcoder_id"><label class="custom-control-label" for="show_atcoder_id">AtCoder ID を表示する</label>
+                    </div>
+                    <div class="custom-control custom-checkbox form-check">
+                        <input type="hidden" name="show_affiliation" value="0">
+                        <input type="checkbox" class="custom-control-input" name="show_affiliation" value="1" checked="checked" id="show_affiliation"><label class="custom-control-label" for="show_affiliation">所属を表示する</label>
+                    </div>
 
-                    <p class="my-2">AtCoder ID について、レートに応じた色をつけるかどうかを選択します。</p>
+                    <p class="my-2">AtCoder ID について、レートに応じた色をつけるかどうかを選択します。色は json ファイルが作成された当時のレーティングに応じて付きます。</p>
+                    <div class="custom-control custom-checkbox form-check">
+                        <input type="hidden" name="colorize_atcoder_id" value="0">
+                        <input type="checkbox" class="custom-control-input" name="colorize_atcoder_id" value="1" checked="checked" id="colorize_atcoder_id"><label class="custom-control-label" for="colorize_atcoder_id">AtCoder ID に色をつける</label>
+                    </div>
                 </div>
                 <!-- option end -->
 
                 <!-- submit form (to PDF) -->
-                <input id="run_pdf_making_btn" type="submit" name="send" class="btn btn-primary mb-3 mt-4 btn-block" value="表の作成を実行">
+                <input type="hidden" name="token" value="<?php echo h($token); ?>">
+                <input id="run_pdf_making_btn" type="submit" class="btn btn-primary mb-3 mt-4 btn-block" value="表の作成を実行">
                 <!-- submit form (to PDF) end -->
             </form>
             <!-- form section end -->
