@@ -18,8 +18,8 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./
-          server-dir: ./compro/teamdivision2pdf
+          server-dir: ./compro/teamdivision2pdf/
           exclude: .git*
             - .git*/**
             - README.md
-            
+
